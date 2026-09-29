@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Akash M Tailor — Developer × Designer</title>
+<style>
+:root {
+  color-scheme: light dark;
+  --bg: light-dark(#f6f7fb, #090a0f);
+  --surface: light-dark(#ffffff, #11131a);
+  --surface-2: light-dark(#f0f1f6, #171923);
+  --text: light-dark(#101116, #f4f5f8);
+  --muted: light-dark(#626675, #9ca1b1);
+  --line: light-dark(#dedfe7, #292c38);
+  --accent: light-dark(#6557ff, #8b7cff);
+  --accent-2: light-dark(#d8d3ff, #2b2757);
+  --shadow: light-dark(0 24px 70px rgba(20, 22, 40, .10), 0 24px 70px rgba(0,0,0,.35));
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg); color: var(--text); }
+button, a { font: inherit; }
+button { cursor: pointer; }
+#app { min-height: 100vh; background: var(--bg); }
+.container { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
+.nav { position: sticky; top: 0; z-index: 20; backdrop-filter: blur(18px); background: color-mix(in srgb, var(--bg) 82%, transparent); border-bottom: 1px solid color-mix(in srgb, var(--line) 70%, transparent); }
+.nav-inner { height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.logo { font-weight: 900; letter-spacing: -.06em; font-size: 20px; text-decoration: none; color: var(--text); }
+.logo span { color: var(--accent); }
+.nav-links { display: flex; gap: 24px; align-items: center; }
+.nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 700; }
+.nav-links a:hover { color: var(--text); }
+.nav-btn { border: 1px solid var(--line); background: var(--surface); color: var(--text); padding: 10px 14px; border-radius: 999px; font-weight: 800; }
+.hero { padding: 96px 0 74px; position: relative; overflow: hidden; }
+.hero:before { content: ""; position: absolute; width: 500px; height: 500px; right: -170px; top: -160px; background: radial-gradient(circle, color-mix(in srgb, var(--accent) 25%, transparent), transparent 68%); pointer-events: none; }
+.eyebrow { display: inline-flex; align-items: center; gap: 9px; border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 8px 12px; color: var(--muted); font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.dot { width: 7px; height: 7px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 0 5px var(--accent-2); }
+h1 { font-size: clamp(54px, 9vw, 116px); line-height: .86; letter-spacing: -.075em; margin: 28px 0; max-width: 1000px; }
+.gradient { background: linear-gradient(110deg, var(--text), var(--accent)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero-copy { max-width: 720px; font-size: clamp(18px, 2vw, 22px); line-height: 1.55; color: var(--muted); }
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
+.primary, .secondary { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; border-radius: 13px; padding: 13px 18px; font-weight: 850; }
+.primary { background: var(--text); color: var(--bg); }
+.secondary { border: 1px solid var(--line); background: var(--surface); color: var(--text); }
+.marquee { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); overflow: hidden; padding: 15px 0; color: var(--muted); font-size: 12px; font-weight: 850; letter-spacing: .14em; text-transform: uppercase; }
+.track { display: flex; gap: 36px; width: max-content; animation: slide 22s linear infinite; }
+.track span::after { content: "✦"; margin-left: 36px; color: var(--accent); }
+@keyframes slide { to { transform: translateX(-50%); } }
+.section { padding: 94px 0; }
+.section-head { display: flex; justify-content: space-between; gap: 30px; align-items: end; margin-bottom: 34px; }
+.kicker { color: var(--accent); font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: .16em; }
+h2 { font-size: clamp(36px, 5vw, 62px); letter-spacing: -.055em; line-height: .95; margin: 8px 0 0; }
+.section-intro { max-width: 450px; color: var(--muted); line-height: 1.65; }
+.about-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 20px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 24px; padding: 28px; box-shadow: var(--shadow); }
+.about-main { min-height: 320px; display: flex; flex-direction: column; justify-content: space-between; }
+.about-main p { color: var(--muted); line-height: 1.8; font-size: 17px; max-width: 690px; }
+.stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.stat { padding: 20px; border-radius: 18px; background: var(--surface-2); border: 1px solid var(--line); }
+.stat strong { display: block; font-size: 31px; letter-spacing: -.04em; }
+.stat span { color: var(--muted); font-size: 12px; font-weight: 700; }
+.skills { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.skill-card { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 22px; min-height: 175px; }
+.skill-card h3 { margin: 0 0 14px; font-size: 15px; }
+.tags { display: flex; flex-wrap: wrap; gap: 7px; }
+.tag { padding: 7px 9px; border-radius: 9px; background: var(--surface-2); color: var(--muted); font-size: 12px; font-weight: 750; border: 1px solid var(--line); }
+.projects { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+.project { position: relative; overflow: hidden; min-height: 330px; display: flex; flex-direction: column; justify-content: space-between; }
+.project:before { content: ""; position: absolute; width: 180px; height: 180px; right: -70px; top: -60px; border-radius: 50%; background: radial-gradient(circle, color-mix(in srgb, var(--accent) 22%, transparent), transparent 68%); }
+.project-number { color: var(--accent); font-weight: 900; font-size: 12px; }
+.project h3 { font-size: 31px; letter-spacing: -.045em; margin: 14px 0 10px; }
+.project p { color: var(--muted); line-height: 1.65; max-width: 560px; }
+.project-meta { display: flex; justify-content: space-between; gap: 15px; align-items: end; }
+.year { color: var(--muted); font-size: 12px; font-weight: 800; }
+.timeline { display: grid; gap: 12px; }
+.timeline-item { display: grid; grid-template-columns: 150px 1fr; gap: 25px; align-items: start; padding: 23px 0; border-top: 1px solid var(--line); }
+.timeline-item:last-child { border-bottom: 1px solid var(--line); }
+.timeline-year { color: var(--accent); font-size: 13px; font-weight: 900; }
+.timeline-item h3 { margin: 0 0 7px; font-size: 20px; }
+.timeline-item p { margin: 0; color: var(--muted); line-height: 1.6; }
+.contact { padding: 80px 0 100px; }
+.contact-card { background: var(--text); color: var(--bg); border-radius: 30px; padding: clamp(30px, 7vw, 70px); display: grid; grid-template-columns: 1.3fr .7fr; gap: 30px; }
+.contact-card h2 { max-width: 650px; }
+.contact-card p { opacity: .68; line-height: 1.65; max-width: 580px; }
+.contact-links { display: grid; gap: 10px; align-content: center; }
+.contact-links a { color: var(--bg); text-decoration: none; padding: 13px 15px; border: 1px solid color-mix(in srgb, var(--bg) 25%, transparent); border-radius: 12px; font-weight: 750; font-size: 13px; word-break: break-word; }
+.footer { padding: 24px 0 35px; color: var(--muted); font-size: 12px; display: flex; justify-content: space-between; gap: 15px; }
+.reveal { opacity: 0; transform: translateY(18px); transition: .65s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+@media (max-width: 850px) {
+  .nav-links { display: none; }
+  .about-grid, .contact-card { grid-template-columns: 1fr; }
+  .skills { grid-template-columns: repeat(2, 1fr); }
+  .projects { grid-template-columns: 1fr; }
+  .hero { padding-top: 72px; }
+}
+@media (max-width: 520px) {
+  .container { width: min(100% - 26px, 1160px); }
+  .skills, .stat-grid { grid-template-columns: 1fr; }
+  .timeline-item { grid-template-columns: 1fr; gap: 7px; }
+  h1 { font-size: 57px; }
+  .section { padding: 68px 0; }
+  .footer { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="logo" href="#top">AM<span>.</span></a>
+      <div class="nav-links">
+        <a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#journey">Journey</a>
+      </div>
+      <a class="nav-btn" href="#contact">Let's talk ↗</a>
+    </div>
+  </nav>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container">
+        <div class="eyebrow"><span class="dot"></span> Developer × UI/UX Designer</div>
+        <h1>CREATE<br><span class="gradient">SOMETHING</span><br>UNIQUE.</h1>
+        <p class="hero-copy">I'm Akash M Tailor — a Computer Science Engineering student who enjoys turning ideas into thoughtful digital experiences through code, interfaces, and creative problem solving.</p>
+        <div class="hero-actions">
+          <a class="primary" href="#projects">Explore my work ↓</a>
+          <a class="secondary" href="#contact">Get in touch ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="marquee"><div class="track"><span>Developer</span><span>Designer</span><span>Creative Thinker</span><span>Full Stack</span><span>Developer</span><span>Designer</span><span>Creative Thinker</span><span>Full Stack</span></div></div>
+
+    <section class="section reveal" id="about">
+      <div class="container">
+        <div class="section-head"><div><div class="kicker">01 / About</div><h2>More than<br>just code.</h2></div><p class="section-intro">A portfolio built around the intersection of development, design, and curiosity — not a template pretending to be a career I haven't had yet.</p></div>
+        <div class="about-grid">
+          <div class="card about-main">
+            <div><div class="kicker">Who I am</div><p>I'm pursuing a Bachelor of Engineering in Computer Science and Engineering at Alva's Institute of Engineering and Technology. My work spans Java, JavaScript, Spring Boot, React.js, databases, and UI/UX thinking.</p><p>I like understanding how a system works from the interface all the way to the database — then shaping that system into something clear and useful.</p></div>
+            <div class="tags"><span class="tag">Mangalore, Karnataka, India</span><span class="tag">CSE</span><span class="tag">Developer + Designer</span></div>
+          </div>
+          <div class="card"><div class="kicker">At a glance</div><div class="stat-grid" style="margin-top:18px"><div class="stat"><strong>4</strong><span>Featured projects</span></div><div class="stat"><strong>2026</strong><span>Xpheria hackathon</span></div><div class="stat"><strong>Java</strong><span>Core development</span></div><div class="stat"><strong>UI/UX</strong><span>Design mindset</span></div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="skills">
+      <div class="container">
+        <div class="section-head"><div><div class="kicker">02 / Toolkit</div><h2>Built across<br>the stack.</h2></div><p class="section-intro">The technologies currently represented in my work and learning journey.</p></div>
+        <div class="skills">
+          <div class="skill-card"><h3>Languages</h3><div class="tags"><span class="tag">C</span><span class="tag">Java</span><span class="tag">JavaScript</span></div></div>
+          <div class="skill-card"><h3>Frontend</h3><div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">React.js</span></div></div>
+          <div class="skill-card"><h3>Backend & Frameworks</h3><div class="tags"><span class="tag">Node.js</span><span class="tag">Spring Boot</span><span class="tag">Java EE</span><span class="tag">Servlets</span><span class="tag">JSP</span><span class="tag">JDBC</span></div></div>
+          <div class="skill-card"><h3>Data & Tools</h3><div class="tags"><span class="tag">MySQL</span><span class="tag">MongoDB</span><span class="tag">LaTeX</span><span class="tag">UI/UX Design</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="projects">
+      <div class="container">
+        <div class="section-head"><div><div class="kicker">03 / Selected work</div><h2>Projects with<br>a purpose.</h2></div><p class="section-intro">Academic and personal builds that show how I approach interfaces, APIs, databases, and application logic.</p></div>
+        <div class="projects">
+          <article class="card project"><div><div class="project-number">01 — FULL STACK</div><h3>Galaxy Explorer</h3><p>An astronomy learning platform for children and students. A space-themed interface presents stars and planets through dynamic cards and popup modals, backed by a Spring Boot REST API and MySQL database.</p></div><div class="project-meta"><div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">Spring Boot</span><span class="tag">MySQL</span></div><span class="year">Mini Project</span></div></article>
+          <article class="card project"><div><div class="project-number">02 — JAVA EE</div><h3>Employee Salary Management</h3><p>A Java EE application for managing employee salary information with CRUD modules, DAO architecture, JDBC connectivity, MySQL persistence, and SQL reporting queries.</p></div><div class="project-meta"><div class="tags"><span class="tag">Servlets</span><span class="tag">JSP</span><span class="tag">JDBC</span><span class="tag">MySQL</span></div><span class="year">Application</span></div></article>
+          <article class="card project"><div><div class="project-number">03 — GAME</div><h3>Sliding Puzzle Game</h3><p>A classic sliding puzzle project focused on interaction logic, game-state handling, and a clean playable interface.</p></div><div class="project-meta"><div class="tags"><span class="tag">JavaScript</span><span class="tag">UI</span><span class="tag">Game Logic</span></div><span class="year">2025</span></div></article>
+          <article class="card project"><div><div class="project-number">04 — MANAGEMENT</div><h3>Hotel Management</h3><p>A hotel-management project focused on organizing application workflows and structured data around hotel operations.</p></div><div class="project-meta"><div class="tags"><span class="tag">Java</span><span class="tag">Database</span><span class="tag">Management</span></div><span class="year">2025</span></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="journey">
+      <div class="container">
+        <div class="section-head"><div><div class="kicker">04 / Journey</div><h2>Learning by<br>building.</h2></div><p class="section-intro">A compact record of the academic and event experience you've shared with me.</p></div>
+        <div class="timeline">
+          <div class="timeline-item"><div class="timeline-year">2026</div><div><h3>Xpheria National-Level Hackathon</h3><p>Participated in the Xpheria National-Level Hackathon at Alva's Education Foundation, with a focus on technical problem-solving and hands-on event participation.</p></div></div>
+          <div class="timeline-item"><div class="timeline-year">2026 — Present</div><div><h3>Alva's Institute of Engineering and Technology</h3><p>Bachelor of Engineering in Computer Science and Engineering.</p></div></div>
+          <div class="timeline-item"><div class="timeline-year">2025</div><div><h3>Project Building</h3><p>Developed projects including Sliding Puzzle Game and Hotel Management while building practical foundations in application development.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact reveal" id="contact">
+      <div class="container">
+        <div class="contact-card">
+          <div><div class="kicker" style="color:var(--accent-2)">05 / Contact</div><h2>Have an idea?<br>Let's build it.</h2><p>For projects, collaboration, or simply talking about development and design, reach out through the details below.</p></div>
+          <div class="contact-links"><a href="mailto:tailorakash006@gmail.com">✉ tailorakash006@gmail.com</a><a href="tel:+918217124745">☎ +91 8217124745</a><a href="#top">↑ Back to top</a></div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="container footer"><span>© 2026 Akash M Tailor</span><span>Developer × UI/UX Designer · Mangalore, Karnataka</span></footer>
+</div>
+<script>
+const observer = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: .08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
